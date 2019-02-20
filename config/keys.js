@@ -1,3 +1,3 @@
 module.exports = {
-    MongoURI: 'mongodb://localhost/userauth'
+    MongoURI: 'mongodb://localhost/bulldog'
 }

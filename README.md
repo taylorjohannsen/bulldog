@@ -5,12 +5,13 @@ This project uses MongoDB to authenticate an admin to post products for consumer
 
 This website was made with the following technology:
 
-HTML/CSS
-Vanilla JS
-Node.JS / Express.JS
-Passport.JS
-EJS
-MongoDB
-Apache Web Server
+- HTML/CSS
+- Vanilla JS
+- Node.JS / Express.JS
+- Passport.JS
+- EJS 
+- MongoDB
+
+Hosted on NodeChef
 
 Live website - 

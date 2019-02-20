@@ -4,16 +4,23 @@ const User = require('../models/User');
 const bcrypt = require('bcryptjs');
 const flash = require('connect-flash');
 const passport = require('passport');
+const mongoose = require('mongoose');
+const multer = require('multer');
+const path = require('path');
+const { ensureAuthenticated } = require('../config/auth');
 require('../app');
 
+// admin login
 router.get('/login', (req, res) => {
     res.render('login');
 });
 
-router.get('/register', (req, res) => {
+// admin register page
+router.get('/register', ensureAuthenticated, (req, res) => {
     res.render('register');
 });
 
+// register post
 router.post('/register', (req, res) => {
     const { name, email, password, password2 } = req.body;
     let errors = [];
@@ -64,7 +71,7 @@ router.post('/register', (req, res) => {
                         newUser.save()
                         .then(user => {
                             req.flash('success_msg', 'You are now registered and can login');
-                            res.redirect('/users/login');
+                            res.redirect('/admin/login');
                         })
                         .catch(err => console.log(err));
                     })
@@ -74,11 +81,59 @@ router.post('/register', (req, res) => {
     }
 });
 
+// multer setup
+const storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+        cb(null, './public/pictures')
+    },
+    filename: function(req, file, cb) {
+        cb(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname));
+    }
+});
+
+const upload = multer({
+    storage: storage,
+    limits: { fileSize: 1000000 },
+    fileFilter: function(req, file, cb) {
+        checkFileType(file, cb);
+    }
+}).single('myImage');
+
+function checkFileType(file, cb) {
+    const filetypes = /jpeg|jpg|png|gif/;
+    const extname = filetypes.test(path.extname(file.originalname).toLowerCase());
+    const mimetype = filetypes.test(file.mimetype);
+
+    if (mimetype && extname) {
+        return cb(null, true);
+    } else {
+        cb('Error - Images Only!');
+    }
+}
+
+// submit photo handle
+router.post('/upload', (req, res, next) => {
+    upload(req, res, (err) => {
+        if (err || !req.file) {
+            req.flash('photoerror', 'Incorrect file type - .jpeg, .png, .jpg, .gif only ');
+            res.redirect('back');
+        } else {
+            User.updateOne({ _id: req.user.id }, {
+                image: ('../' + req.file.path)
+            }, { new: true }, (err, user) => {
+                if (err) throw err;
+                req.flash('photosuccess', 'Photo uploaded successfully!');
+                res.redirect('/profile/' + req.user.id);
+            });    
+        }
+    });
+});
+
 //login handle 
 router.post('/login', (req, res, next) => {
     passport.authenticate('local', {
         successRedirect: '/dashboard',
-        failureRedirect: '/users/login',
+        failureRedirect: '/admin/login',
         failureFlash: true
     })(req, res, next);
 });
@@ -87,7 +142,7 @@ router.post('/login', (req, res, next) => {
 router.get('/logout', (req, res) => {
     req.logout();
     req.flash('success_msg', 'You are logged out');
-    res.redirect('/users/login');
+    res.redirect('/admin/login');
 })
 
 module.exports = router;
