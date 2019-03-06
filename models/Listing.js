@@ -11,7 +11,6 @@ const ListSchema = new mongoose.Schema({
     photos: [{
         path: {
             type: String,
-            default: '../public/logo.png'
         },
         _id: {
             type: mongoose.Schema.Types.ObjectId

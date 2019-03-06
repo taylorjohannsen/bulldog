@@ -11,6 +11,11 @@ require('./config/passport')(passport);
 
 const app = express();
 
+// css and client side js
+app.use('/public', express.static(path.join(__dirname, "public")));
+app.use(express.static(path.join(__dirname, 'public')));
+app.set('pictures', path.join(__dirname, 'public/pictures'));
+
 // mongodb
 mongoose.connect(db.MongoURI, { useNewUrlParser: true })
     .then(() => console.log('DB Connected!'))

@@ -9,4 +9,10 @@
     <p class="lead mb-3">warehouse id, <%= listing.whid %></p>
     <p class="lead mb-3">price, <%= listing.price %></p>
     <p class="lead mb-3">date, <%= listing.date %></p>
+    <div class='test'>
+        <% if (listing.photos[0].path === undefinded) { %>
+            <img src='<%= listing.photos[0].path %>'>
+        <% }; %>
+    </div>
+
 <% }); %>
