@@ -6,24 +6,22 @@ const ListSchema = new mongoose.Schema({
         required: true
     },
     desc: {
-        type: String,
-        required: true
+        type: String
     },
     photos: [{
         path: {
             type: String,
+            default: '../public/logo.png'
         },
         _id: {
             type: mongoose.Schema.Types.ObjectId
         }
     }],
     whid: {
-        type: String,
-        required: true
+        type: String
     },
     price: {
-        type: Number,
-        required: true
+        type: String
     },
     date: {
         type: Date,

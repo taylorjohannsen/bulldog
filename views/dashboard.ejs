@@ -1,3 +1,12 @@
 <h1 class="mt-4">Dashboard</h1>
-<p class="lead mb-3">Welcome <%= name %></p>
-<a href="/users/logout" class="btn btn-secondary">Logout</a>
+<a href="/admin/logout" class="btn btn-secondary">Logout</a>
+
+<a href="/admin/addlist" class="btn btn-secondary">Add Listing</a>
+
+<% listings.forEach(function(listing) { %>
+    <p class="lead mb-3">Title, <%= listing.title %></p>
+    <p class="lead mb-3">desc, <%= listing.desc %></p>
+    <p class="lead mb-3">warehouse id, <%= listing.whid %></p>
+    <p class="lead mb-3">price, <%= listing.price %></p>
+    <p class="lead mb-3">date, <%= listing.date %></p>
+<% }); %>

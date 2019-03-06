@@ -1,5 +1,8 @@
 const express = require('express');
 const router = express.Router();
+const mongoose = require('mongoose');
+const Listing = require('../models/Listing');
+const User = require('../models/User');
 const { ensureAuthenticated } = require('../config/auth');
 
 router.get('/', (req, res) => {
@@ -7,9 +10,9 @@ router.get('/', (req, res) => {
 });
 
 router.get('/dashboard', ensureAuthenticated, (req, res) => {
-    res.render('dashboard', {
-        name: req.user.name
-    });
+    Listing.find({}).populate('photos.path').sort({ date: -1 }).exec((err, listings) => {
+        res.render('dashboard', {listings: listings});
+    })
 })
 
 

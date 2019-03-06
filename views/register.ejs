@@ -4,7 +4,7 @@
         <h1 class="text-center mb-3">
         <i class="fas fa-user-plus"></i> Register</h1>
         <% include ./partials/messages %>
-        <form action="/users/register" method="POST">
+        <form action="/admin/register" method="POST">
           <div class="form-group">
             <label for="name">Name</label>
             <input
@@ -14,17 +14,6 @@
               class="form-control"
               placeholder="Enter Name"
               value="<%= typeof name != 'undefined' ? name : '' %>"
-            />
-          </div>
-          <div class="form-group">
-            <label for="email">Email</label>
-            <input
-              type="email"
-              id="email"
-              name="email"
-              class="form-control"
-              placeholder="Enter Email"
-              value="<%= typeof email != 'undefined' ? email : '' %>"
             />
           </div>
           <div class="form-group">
@@ -53,7 +42,7 @@
             Register
           </button>
         </form>
-        <p class="lead mt-4">Have An Account? <a href="/users/login">Login</a></p>
+        <p class="lead mt-4">Have An Account? <a href="/admin/login">Login</a></p>
       </div>
     </div>
   </div>

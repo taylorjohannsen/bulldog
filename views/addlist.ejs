@@ -1,0 +1,16 @@
+<a href="/dashboard" class="btn btn-secondary">Dashboard</a>
+<% include ./partials/messages %>
+
+
+<form class='imageUpload' action="/admin/upload" method="POST">
+    <div>
+      <div class="">
+        <input type='text' id="title" name='title' placeholder="Item Title">
+        <input type='text' id='desc' name='desc' placeholder="Item desc">
+        <input type='text' id='whid' name='whid' placeholder="Item warehouse id">
+        <input type='number' id='price' name='price' placeholder="Item price">
+        <button type="submit" class="Submit Top">Post</button>
+      </div>
+    </div>
+  </form>
+

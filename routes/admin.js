@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const User = require('../models/User');
+const Listing = require('../models/Listing');
 const bcrypt = require('bcryptjs');
 const flash = require('connect-flash');
 const passport = require('passport');
@@ -16,16 +17,21 @@ router.get('/login', (req, res) => {
 });
 
 // admin register page
-router.get('/register', ensureAuthenticated, (req, res) => {
+router.get('/register', (req, res) => {
     res.render('register');
+});
+
+// add item listing page 
+router.get('/addlist', ensureAuthenticated, (req, res) => {
+    res.render('addlist');
 });
 
 // register post
 router.post('/register', (req, res) => {
-    const { name, email, password, password2 } = req.body;
+    const { name, password, password2 } = req.body;
     let errors = [];
 
-    if(!name || !email || !password || !password2) {
+    if(!name || !password || !password2) {
         errors.push({ msg: 'Please fill in all fields' });
     }
 
@@ -41,26 +47,23 @@ router.post('/register', (req, res) => {
         res.render('register', {
             errors,
             name,
-            email,
             password,
             password2
         });
     } else {
-        User.findOne({ email: email })
+        User.findOne({ name: name })
         .then(user => {
             if(user) {
                 errors.push({ msg: 'Email is already registerd' });
                 res.render('register', {
                     errors,
                     name,
-                    email,
                     password,
                     password2
                 });        
             } else {
                 const newUser = new User({
                     name,
-                    email,
                     password
                 });
 
@@ -111,23 +114,30 @@ function checkFileType(file, cb) {
     }
 }
 
-// submit photo handle
+// submit listing handlee
 router.post('/upload', (req, res, next) => {
-    upload(req, res, (err) => {
-        if (err || !req.file) {
-            req.flash('photoerror', 'Incorrect file type - .jpeg, .png, .jpg, .gif only ');
-            res.redirect('back');
-        } else {
-            User.updateOne({ _id: req.user.id }, {
-                image: ('../' + req.file.path)
-            }, { new: true }, (err, user) => {
-                if (err) throw err;
-                req.flash('photosuccess', 'Photo uploaded successfully!');
-                res.redirect('/profile/' + req.user.id);
-            });    
-        }
-    });
+    const { title, desc, whid, price } = req.body;
+
+    if (!title) {
+        req.flash('error', 'Please add a title!');
+        res.redirect('back');
+    } else {
+
+        let newList = new Listing({
+            title: title,
+            desc: desc,
+            whid: whid,
+            price: price,
+            _id: new mongoose.Types.ObjectId()
+        });
+
+        newList.save(function(err) {
+            if (err) throw err;
+            res.redirect('/dashboard');
+        });   
+    };
 });
+
 
 //login handle 
 router.post('/login', (req, res, next) => {
@@ -143,6 +153,6 @@ router.get('/logout', (req, res) => {
     req.logout();
     req.flash('success_msg', 'You are logged out');
     res.redirect('/admin/login');
-})
+});
 
 module.exports = router;
