@@ -1,0 +1,15 @@
+<a href="/dashboard" class="btn btn-secondary">Dashboard</a>
+
+<a href="/admin/photos/<%= listing._id %>" class="btn btn-secondary">Add Photos</a>
+
+
+<a href='/admin/inventory/<%= listing._id %>'>
+    <p class="lead mb-3">Title, <%= listing.title %></p>
+</a>
+<p class="lead mb-3">desc, <%= listing.desc %></p>
+<p class="lead mb-3">warehouse id, <%= listing.whid %></p>
+<p class="lead mb-3">price, <%= listing.price %></p>
+<p class="lead mb-3">date, <%= listing.date %></p>
+<% listing.photos.forEach(function(photo) { %>
+    <img src='../<%= photo.path %>'>
+<% }); %>

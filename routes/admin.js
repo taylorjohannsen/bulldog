@@ -26,6 +26,7 @@ router.get('/addlist', ensureAuthenticated, (req, res) => {
     res.render('addlist');
 });
 
+
 // register post
 router.post('/register', (req, res) => {
     const { name, password, password2 } = req.body;
@@ -96,11 +97,11 @@ const storage = multer.diskStorage({
 
 const upload = multer({
     storage: storage,
-    limits: { fileSize: 1000000 },
+    limits: { fileSize: 100000000 },
     fileFilter: function(req, file, cb) {
         checkFileType(file, cb);
     }
-}).single('myImage');
+}).array('myImage');
 
 function checkFileType(file, cb) {
     const filetypes = /jpeg|jpg|png|gif/;
@@ -115,13 +116,17 @@ function checkFileType(file, cb) {
 }
 
 // submit listing handlee
-router.post('/upload', (req, res, next) => {
+router.post('/upload', ensureAuthenticated, (req, res, next) => {
     const { title, desc, whid, price } = req.body;
 
     if (!title) {
         req.flash('error', 'Please add a title!');
         res.redirect('back');
     } else {
+
+        let defPhoto = ({
+            path: '../public/logo.png',
+        });
 
         let newList = new Listing({
             title: title,
@@ -131,13 +136,60 @@ router.post('/upload', (req, res, next) => {
             _id: new mongoose.Types.ObjectId()
         });
 
+        newList.photos.push(defPhoto);
+
         newList.save(function(err) {
             if (err) throw err;
-            res.redirect('/dashboard');
+            res.redirect(('/admin/inventory/' + newList._id));
         });   
     };
 });
 
+// admin listing page 
+router.get('/inventory/:id', ensureAuthenticated, (req, res, next) => {
+    Listing.findOne({ _id: req.params.id }).exec((err, listing) => {
+        if (err) throw err;
+        res.render('inventory', { listing: listing });
+    });
+});
+
+// add photos page
+router.get('/photos/:id', ensureAuthenticated, (req, res, next) => {
+    Listing.findOne({ _id: req.params.id }).exec((err, listing) => {
+        if (err) throw err;
+        res.render('addphoto', { listing: listing });
+    });
+});
+
+// add photos post 
+router.post('/picupload/:id', ensureAuthenticated, (req, res, next) => {
+    upload(req, res, (err) => {
+        if (err || !req.files) {
+            if (err) throw err;
+            req.flash('error', 'Incorrect file type - .jpeg, .png, .jpg, .gif only ');
+            res.redirect('back');
+        } else {
+
+            Listing.findOne({ _id: req.params.id }).exec((err, listing) => {
+                if (listing.photos[0].path == '../public/logo.png') {
+                    listing.photos.shift();
+                }
+                
+                req.files.forEach(function(file) {
+                    let newPhoto = ({
+                        path: ('../' + file.path)
+                    });
+                    listing.photos.push(newPhoto);
+                });
+
+                listing.save(function(err) {
+                    if (err) throw err;
+                    res.redirect(('/admin/inventory/' + listing._id));
+                });
+            });
+        };
+    });
+});
 
 //login handle 
 router.post('/login', (req, res, next) => {

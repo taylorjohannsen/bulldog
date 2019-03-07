@@ -1,0 +1,8 @@
+<a href="/dashboard" class="btn btn-secondary">Dashboard</a>
+<% include ./partials/messages %>
+
+
+<form action='/admin/picupload/<%= listing._id %>' method="POST" enctype="multipart/form-data">
+    <input name="myImage" type="file" multiple>
+    <button type='submit'>Submit</button>
+</form>
