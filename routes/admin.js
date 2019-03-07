@@ -11,10 +11,36 @@ const path = require('path');
 const { ensureAuthenticated } = require('../config/auth');
 require('../app');
 
+
+
+
 // admin login
 router.get('/login', (req, res) => {
     res.render('login');
 });
+
+//login handle 
+router.post('/login', (req, res, next) => {
+    passport.authenticate('local', {
+        successRedirect: '/admin/dashboard',
+        failureRedirect: '/admin/login',
+        failureFlash: true
+    })(req, res, next);
+});
+
+//logout handle 
+router.get('/logout', (req, res) => {
+    req.logout();
+    req.flash('success_msg', 'You are logged out');
+    res.redirect('/admin/login');
+});
+
+// dashboard page
+router.get('/dashboard', ensureAuthenticated, (req, res) => {
+    Listing.find({}).sort({ date: -1 }).exec((err, listings) => {
+        res.render('dashboard', {listings: listings});
+    })
+})
 
 // admin register page
 router.get('/register', (req, res) => {
@@ -171,8 +197,10 @@ router.post('/picupload/:id', ensureAuthenticated, (req, res, next) => {
         } else {
 
             Listing.findOne({ _id: req.params.id }).exec((err, listing) => {
-                if (listing.photos[0].path == '../public/logo.png') {
-                    listing.photos.shift();
+                if (listing.photos.length > 0) {
+                    if (listing.photos[0].path == '../public/logo.png') {
+                        listing.photos.shift();
+                    }    
                 }
                 
                 req.files.forEach(function(file) {
@@ -191,20 +219,47 @@ router.post('/picupload/:id', ensureAuthenticated, (req, res, next) => {
     });
 });
 
-//login handle 
-router.post('/login', (req, res, next) => {
-    passport.authenticate('local', {
-        successRedirect: '/dashboard',
-        failureRedirect: '/admin/login',
-        failureFlash: true
-    })(req, res, next);
+// update listing
+router.post('/update/:id', ensureAuthenticated, (req, res, next) => {
+    const { title, desc, whid, price } = req.body;
+    
+    Listing.updateOne({ _id: req.params.id }, {
+        title: title,
+        desc: desc,
+        whid: whid,
+        price: price
+    }, {
+        new: true
+    }, (err, listing) => {
+        if (err) throw err;
+        req.flash('success_msg', 'Listing updated!');
+        res.redirect(('/admin/inventory/' + req.params.id));
+    });
 });
 
-//logout handle 
-router.get('/logout', (req, res) => {
-    req.logout();
-    req.flash('success_msg', 'You are logged out');
-    res.redirect('/admin/login');
+// delete listing
+router.post('/deletelisting/:id', ensureAuthenticated, (req, res, next) => {
+    Listing.deleteOne({ _id: req.params.id }, function(err) {
+        if (err) throw err;
+        res.redirect('/dashboard');
+    });
 });
+
+// delete photo 
+router.post('/deletephoto/:id/:index', ensureAuthenticated, (req, res, next) => {
+    Listing.findOne({ _id: req.params.id }).exec((err, listing) => {
+
+        listing.photos.splice(req.params.index, 1);
+        listing.markModified('photos');
+
+        listing.save(function(err) {
+            if (err) throw err;
+            req.flash('success_msg', 'Image deleted successfully!');
+            res.redirect(('/admin/inventory/' + req.params.id));
+        });
+    });
+});
+
+
 
 module.exports = router;

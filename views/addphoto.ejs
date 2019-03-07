@@ -1,8 +1,29 @@
-<a href="/dashboard" class="btn btn-secondary">Dashboard</a>
+<a href="/admin/dashboard" class="btn btn-secondary">Dashboard</a>
 <% include ./partials/messages %>
+<% let counter = 0; %>
 
 
 <form action='/admin/picupload/<%= listing._id %>' method="POST" enctype="multipart/form-data">
     <input name="myImage" type="file" multiple>
     <button type='submit'>Submit</button>
 </form>
+
+<form class='imageUpload' action="/admin/update/<%= listing._id %>" method="POST">
+    <div>
+        <div class="">
+            <input type='text' id="title" name='title' value="<%= listing.title %>">
+            <input type='text' id='desc' name='desc' value="<%= listing.desc %>">
+            <input type='text' id='whid' name='whid' value="<%= listing.whid %>">
+            <input type='number' id='price' name='price' value="<%= listing.price %>">
+            <button type="submit" class="Submit Top">Update Listing</button>
+        </div>
+    </div>
+</form>
+
+<% listing.photos.forEach(function(photo) { %>
+    <form action="/admin/deletephoto/<%= listing._id %>/<%= counter %>" method="POST">
+        <img id=< class='test' src='../<%= photo.path %>'>
+        <button type="submit" class="Submit Top">Delete Image</button>
+    </form>
+    <% counter++; %>
+<% }); %>

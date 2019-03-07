@@ -1,8 +1,12 @@
-<a href="/dashboard" class="btn btn-secondary">Dashboard</a>
+<a href="/admin/dashboard" class="btn btn-secondary">Dashboard</a>
+<a href="/admin/photos/<%= listing._id %>" class="btn btn-secondary">Edit Listing</a>
 
-<a href="/admin/photos/<%= listing._id %>" class="btn btn-secondary">Add Photos</a>
+<form action='/admin/deletelisting/<%= listing._id %>' method='POST'>
+    <button type='submit' class="btn btn-secondary">Delete Listing</button>
+</form>
 
 
+<% include ./partials/messages %>
 <a href='/admin/inventory/<%= listing._id %>'>
     <p class="lead mb-3">Title, <%= listing.title %></p>
 </a>
@@ -11,5 +15,5 @@
 <p class="lead mb-3">price, <%= listing.price %></p>
 <p class="lead mb-3">date, <%= listing.date %></p>
 <% listing.photos.forEach(function(photo) { %>
-    <img src='../<%= photo.path %>'>
+    <img class='test' src='../<%= photo.path %>'>
 <% }); %>

@@ -9,11 +9,7 @@ router.get('/', (req, res) => {
     res.render('Welcome');
 });
 
-router.get('/dashboard', ensureAuthenticated, (req, res) => {
-    Listing.find({}).sort({ date: -1 }).exec((err, listings) => {
-        res.render('dashboard', {listings: listings});
-    })
-})
+
 
 
 module.exports = router;
