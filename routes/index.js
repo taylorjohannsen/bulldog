@@ -2,17 +2,34 @@ const express = require('express');
 const router = express.Router();
 const mongoose = require('mongoose');
 const Listing = require('../models/Listing');
-const User = require('../models/User');
 const { ensureAuthenticated } = require('../config/auth');
+require('../app');
 
-
+// landing page, shows 4 random documents
 router.get('/', (req, res) => {
     Listing.countDocuments().exec((err, allList) => {
         let randomNum = Math.floor(Math.random() * allList);
-
-        Listing.find({}).skip(randomNum).limit(3).exec((err, listings) => {
+        randomNum = randomNum - Number(3);
+        
+        Listing.findRandom({}, {}, {limit: 4}, function(err, listings) {
+            if (err) throw err;
             res.render('landing', { listings: listings });
         });
+    });
+});
+
+// all listing page
+router.get('/listings', (req, res) => {
+    Listing.find({}).exec((err, listings) => {
+        res.render('listings', {listings: listings});
+    });
+});
+
+// single listing page
+router.get('/listings/:id', (req, res) => {
+    Listing.findOne({ _id: req.params.id }).exec((err, listing) => {
+        if (err) throw err;
+        res.render('single', { listing: listing });
     });
 });
 

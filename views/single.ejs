@@ -1,14 +1,7 @@
-<a href="/admin/dashboard" class="btn btn-secondary">Dashboard</a>
-<a href="/admin/photos/<%= listing._id %>" class="btn btn-secondary">Edit Listing</a>
 <% let counter = 0; %>
+<a href="/listings" class="btn btn-secondary btn-block">All Products</a>
 
-<form action='/admin/deletelisting/<%= listing._id %>' method='POST'>
-    <button type='submit' class="btn btn-secondary">Delete Listing</button>
-</form>
-
-
-<% include ./partials/messages %>
-<a href='/admin/inventory/<%= listing._id %>'>
+<a href='/listings/<%= listing._id %>'>
     <p class="lead mb-3">Title, <%= listing.title %></p>
 </a>
 <p class="lead mb-3">desc, <%= listing.desc %></p>

@@ -8,3 +8,9 @@ body {
 .cats {
     margin-left: 100px;
 }
+#big {
+    height: 200px;
+}
+.noDec {
+    text-decoration: none;
+}

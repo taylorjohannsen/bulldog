@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const random = require('mongoose-simple-random');
 
 const ListSchema = new mongoose.Schema({
     title: {
@@ -30,6 +31,8 @@ const ListSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId
     }
 });
+
+ListSchema.plugin(random);
 
 const Listing = mongoose.model('Listing', ListSchema);
 

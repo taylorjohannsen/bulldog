@@ -1,0 +1,31 @@
+<form action='/search' method="POST">
+    <input type='text' id="title" name='title' placeholder="Item Title">
+    <input type='text' id='desc' name='desc' placeholder="Item desc">
+    <input type='text' id='whid' name='whid' placeholder="Item warehouse id">
+    <button type="submit" class="Submit Top">Post</button>
+</form>
+
+<form action='/low' method="POST">
+
+</form>
+
+<form action='/low' method="POST">
+
+</form>
+
+<a href='/listings'>Newest</a>
+
+
+
+<% listings.forEach(function(listing) { %>
+    <a href='/listings/<%= listing._id %>'>
+        <p class="lead mb-3">Title, <%= listing.title %></p>
+    </a>
+    <p class="lead mb-3">desc, <%= listing.desc %></p>
+    <p class="lead mb-3">warehouse id, <%= listing.whid %></p>
+    <p class="lead mb-3">price, <%= listing.price %></p>
+    <p class="lead mb-3">date, <%= listing.date %></p>
+    <% if (listing.photos.length > 0) { %>
+        <img class='test' src='<%= listing.photos[0].path %>'>
+    <% }; %>
+<% }); %>

@@ -164,7 +164,6 @@ router.post('/upload', ensureAuthenticated, (req, res, next) => {
         });
 
         newList.photos.push(defPhoto);
-
         newList.save(function(err) {
             if (err) throw err;
             res.redirect(('/admin/inventory/' + newList._id));
@@ -245,9 +244,11 @@ router.post('/deletelisting/:id', ensureAuthenticated, (req, res, next) => {
             let photoPath = photo.path.toString();
             photoPath = photoPath.replace('../', './');
 
-            fs.unlink(photoPath, (err) => {
-                if (err) throw err;
-            })
+            if (photoPath !== './public/logo.png') {
+                fs.unlink(photoPath, (err) => {
+                    if (err) throw err;
+                });
+            };
         });
        
         Listing.deleteOne({ _id: req.params.id }, function(err) {
@@ -263,10 +264,11 @@ router.post('/deletephoto/:id/:index', ensureAuthenticated, (req, res, next) => 
 
         let phoString = listing.photos[req.params.index].path.toString();
         phoString = phoString.replace('../', './');
+        console.log(phoString);
 
         fs.unlink(phoString, (err) => {
             if (err) throw err;
-        });
+        });    
 
         listing.photos.splice(req.params.index, 1);
         listing.markModified('photos');
