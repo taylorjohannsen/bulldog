@@ -9,6 +9,7 @@ const mongoose = require('mongoose');
 const multer = require('multer');
 const path = require('path');
 const { ensureAuthenticated } = require('../config/auth');
+const fs = require('fs');
 require('../app');
 
 
@@ -183,7 +184,7 @@ router.get('/inventory/:id', ensureAuthenticated, (req, res, next) => {
 router.get('/photos/:id', ensureAuthenticated, (req, res, next) => {
     Listing.findOne({ _id: req.params.id }).exec((err, listing) => {
         if (err) throw err;
-        res.render('addphoto', { listing: listing });
+        res.render('edit', { listing: listing });
     });
 });
 
@@ -239,15 +240,33 @@ router.post('/update/:id', ensureAuthenticated, (req, res, next) => {
 
 // delete listing
 router.post('/deletelisting/:id', ensureAuthenticated, (req, res, next) => {
-    Listing.deleteOne({ _id: req.params.id }, function(err) {
-        if (err) throw err;
-        res.redirect('/dashboard');
+    Listing.findOne({ _id: req.params.id }).exec((err, listing) => {
+        listing.photos.forEach((photo) => {
+            let photoPath = photo.path.toString();
+            photoPath = photoPath.replace('../', './');
+
+            fs.unlink(photoPath, (err) => {
+                if (err) throw err;
+            })
+        });
+       
+        Listing.deleteOne({ _id: req.params.id }, function(err) {
+            if (err) throw err;
+            res.redirect('/admin/dashboard');
+        });
     });
 });
 
 // delete photo 
 router.post('/deletephoto/:id/:index', ensureAuthenticated, (req, res, next) => {
     Listing.findOne({ _id: req.params.id }).exec((err, listing) => {
+
+        let phoString = listing.photos[req.params.index].path.toString();
+        phoString = phoString.replace('../', './');
+
+        fs.unlink(phoString, (err) => {
+            if (err) throw err;
+        });
 
         listing.photos.splice(req.params.index, 1);
         listing.markModified('photos');

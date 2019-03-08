@@ -22,8 +22,12 @@
 
 <% listing.photos.forEach(function(photo) { %>
     <form action="/admin/deletephoto/<%= listing._id %>/<%= counter %>" method="POST">
-        <img id=< class='test' src='../<%= photo.path %>'>
-        <button type="submit" class="Submit Top">Delete Image</button>
+        <% if (photo.path === '../public/logo.png') { %>
+            <img class='test' src='../<%= photo.path %>'>
+        <% } else { %>
+            <img class='test' src='../<%= photo.path %>'>
+            <button type="submit" class="Submit Top">Delete Image</button>    
+        <% } %>
     </form>
     <% counter++; %>
 <% }); %>
