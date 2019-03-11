@@ -14,7 +14,7 @@
 <p class="lead mb-3">desc, <%= listing.desc %></p>
 <p class="lead mb-3">warehouse id, <%= listing.whid %></p>
 <p class="lead mb-3">price, <%= listing.price %></p>
-<p class="lead mb-3">date, <%= listing.date %></p>
+<p class="lead mb-3">date, <%= listing.date.toDateString(); %></p>
 <% listing.photos.forEach(function(photo) { %>
     <a href='#' class='noDec' onclick="bigDisplay('<%= counter %>')">
         <img id='<%= counter %>' class='test' src='../<%= photo.path %>'>

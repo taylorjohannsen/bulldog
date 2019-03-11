@@ -19,7 +19,7 @@
     <p class="lead mb-3">desc, <%= listing.desc %></p>
     <p class="lead mb-3">warehouse id, <%= listing.whid %></p>
     <p class="lead mb-3">price, <%= listing.price %></p>
-    <p class="lead mb-3">date, <%= listing.date %></p>
+    <p class="lead mb-3">date, <%= listing.date.toDateString(); %></p>
     <% if (listing.photos.length > 0) { %>
         <img class='test' src='<%= listing.photos[0].path %>'>
     <% }; %>

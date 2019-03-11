@@ -3,6 +3,23 @@
 
 <a href="/admin/addlist" class="btn btn-secondary">Add Listing</a>
 
+<form action='/admin/dashsearch' method="POST">
+    <input type='text' id="title" name='title' placeholder="Search...">
+    <input type='text' id='whid' name='whid' placeholder="By warehouse ID..">
+    <button type="submit" class="Submit Top">Post</button>
+</form>
+
+<form action='/low' method="POST">
+
+</form>
+
+<form action='/high' method="POST">
+
+</form>
+
+<a href='/admin/dashboard'>Newest</a>
+
+
 <% listings.forEach(function(listing) { %>
     <a href='/admin/inventory/<%= listing._id %>'>
         <p class="lead mb-3">Title, <%= listing.title %></p>
@@ -10,7 +27,7 @@
     <p class="lead mb-3">desc, <%= listing.desc %></p>
     <p class="lead mb-3">warehouse id, <%= listing.whid %></p>
     <p class="lead mb-3">price, <%= listing.price %></p>
-    <p class="lead mb-3">date, <%= listing.date %></p>
+    <p class="lead mb-3">date, <%= listing.date.toDateString(); %></p>
     <% if (listing.photos.length > 0) { %>
         <img class='test' src='<%= listing.photos[0].path %>'>
     <% }; %>

@@ -264,7 +264,6 @@ router.post('/deletephoto/:id/:index', ensureAuthenticated, (req, res, next) => 
 
         let phoString = listing.photos[req.params.index].path.toString();
         phoString = phoString.replace('../', './');
-        console.log(phoString);
 
         fs.unlink(phoString, (err) => {
             if (err) throw err;
@@ -278,6 +277,15 @@ router.post('/deletephoto/:id/:index', ensureAuthenticated, (req, res, next) => 
             req.flash('success_msg', 'Image deleted successfully!');
             res.redirect(('/admin/inventory/' + req.params.id));
         });
+    });
+});
+
+// admin search
+router.post('/dashsearch', ensureAuthenticated, (req,  res) => {
+    const { title, whid } = req.body; 
+    Listing.find({ $or: [{ title: new RegExp(title, 'i')}, { desc: new RegExp(title, 'i')}],  whid: new RegExp(whid, 'i')}).exec((err, listings) => {
+        if (err) throw err;
+        res.render('dashboard', { listings: listings });
     });
 });
 
