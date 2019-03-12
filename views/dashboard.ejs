@@ -9,15 +9,18 @@
     <button type="submit" class="Submit Top">Post</button>
 </form>
 
-<form action='/low' method="POST">
-
+<form action='/admin/low' method="POST">
+    <button type="submit">Price: Low to high</button>
 </form>
 
-<form action='/high' method="POST">
-
+<form action='/admin/high' method="POST">
+    <button type="submit">Price: Hight to low</button>
 </form>
 
-<a href='/admin/dashboard'>Newest</a>
+<form action='/admin/dashsearch' method="POST">
+    <button type="submit" class="Submit Top">Newest</button>
+</form>
+
 
 
 <% listings.forEach(function(listing) { %>

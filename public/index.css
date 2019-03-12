@@ -1,5 +1,5 @@
 body {
-    margin-left: 20%;
+    font-family: 'Late', sans-serif;
 }
 .test {
     height: 100px;
@@ -11,6 +11,31 @@ body {
 #big {
     height: 200px;
 }
+
+
 .noDec {
     text-decoration: none;
+}
+.navBar {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.082);
+    margin-left: 20%;
+    margin-right: 20%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.mainLogo {
+    height: 60px;
+    padding-bottom: 10px;
+}
+.navLinks {
+    padding-top: 22px;
+}
+.linkText {
+    font-size: 18px;
+    padding-left: 10px;
+    color: black;
+}
+.linkText:hover {
+    color: rgb(95, 95, 95);
 }

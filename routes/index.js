@@ -20,7 +20,7 @@ router.get('/', (req, res) => {
 
 // all listing page
 router.get('/listings', (req, res) => {
-    Listing.find({}).exec((err, listings) => {
+    Listing.find({}).sort({ date: -1 }).exec((err, listings) => {
         res.render('listings', { listings: listings });
     });
 });
@@ -37,6 +37,22 @@ router.get('/listings/:id', (req, res) => {
 router.post('/search', (req,  res) => {
     const { title } = req.body; 
     Listing.find({ $or: [{title: new RegExp(title, 'i')}, {desc: new RegExp(title, 'i')},   {whid: new RegExp(title, 'i')}]}).exec((err, listings) => {
+        if (err) throw err;
+        res.render('listings', { listings: listings });
+    });
+});
+
+// search low to high
+router.post('/low', (req,  res) => {
+    Listing.find({}).sort([['price', 1]]).exec((err, listings) => {
+        if (err) throw err;
+        res.render('listings', { listings: listings });
+    });
+});
+
+// search high to low
+router.post('/high', (req,  res) => {
+    Listing.find({}).sort([['price', -1]]).exec((err, listings) => {
         if (err) throw err;
         res.render('listings', { listings: listings });
     });

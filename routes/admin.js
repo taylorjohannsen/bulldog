@@ -289,6 +289,22 @@ router.post('/dashsearch', ensureAuthenticated, (req,  res) => {
     });
 });
 
+// search low to high
+router.post('/low', ensureAuthenticated, (req,  res) => {
+    Listing.find({}).sort([['price', 1]]).exec((err, listings) => {
+        if (err) throw err;
+        res.render('dashboard', { listings: listings });
+    });
+});
+
+// search high to low
+router.post('/high', ensureAuthenticated, (req,  res) => {
+    Listing.find({}).sort([['price', -1]]).exec((err, listings) => {
+        if (err) throw err;
+        res.render('dashboard', { listings: listings });
+    });
+});
+
 
 
 module.exports = router;
