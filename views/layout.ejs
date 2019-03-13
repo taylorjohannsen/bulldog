@@ -10,18 +10,60 @@
     <title>Bulldog Liquidators</title>
 </head>
 <body>
-    <div class='navBar'>
-        <a href='/' class="noDec">
-            <img class='mainLogo' src='/public/bulldoglogo.png'>
-        </a>
-        <div class='navLinks'>
-            <a href='/' class="noDec linkText">Search</a>
-            <a href='/' class="noDec linkText">Contact</a>
-            <a href='/' class="noDec linkText">About Us</a>
+    <div class='mainWrap'>
+        <div class='navBar'>
+            <a href='/' class="noDec">
+                <img class='mainLogo' src='/public/bulldoglogo.png'>
+            </a>
+            <div class='navLinks'>
+                <a href='/listings' class="noDec linkText">Inventory</a>
+                <a href='/contact' class="noDec linkText">Contact</a>
+                <a href='/about-us' class="noDec linkText">About Us</a>
+            </div>
         </div>
-    </div>
-    <div class="container">
-        <%- body %>
+        <div class="container">
+            <%- body %>
+        </div>
+        <div class='footer'>
+                <div class='rFlex locText justCont'>
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d13196.529364028445!2d-119.0258574!3d34.2196391!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x5d5a33eddb2a57e2!2sBulldog+Liquidators!5e0!3m2!1sen!2sus!4v1552507157811" class='locMap' allowfullscreen></iframe>
+                    <div class='cFlex locInfo'>
+                        <div class='richEmail'>3233 Mission Oaks Blvd. Unit A</div>
+                        <div class='richEmail'>Camarillo CA 93012</div>
+                        <div class='richEmail'>Store Manager: Rich</div>
+                        <div class='richEmail'>
+                            <a class='noDec color' href='mailto:richd@bulldogliquidators.com'>richd@bulldogliquidators.com</a>
+                        </div>
+                        <div class='richEmail'>
+                            <a class='noDec color' href='tel:8053120327'>(805) 312-0327</a>
+                        </div>
+                    </div>
+                </div>                        
+            <div class='madeBy'>
+                <div class="cFlex">
+                    <div class='rFlex'>
+                        <a href='/admin/login' class='noDec footText'>Admin Login</a>
+                        <div>|</div>
+                        <a href='/listings' class='noDec footText'>Inventory</a>
+                        <div>|</div>
+                        <a href='/about-us' class='noDec footText'>About Us</a>
+                        <div>|</div>
+                        <a href='/contact' class='noDec footText'>Contact Us</a>
+                    </div>
+                    <div class='rFlex'>
+                        <div class='footCont'>
+                            <div class='footDiv'>Copyright © 2018</div>
+                            <a href="https://bulldogliquidators.com/" class="footText footDiv">Bulldog Liquidators</a>        
+                        </div>
+                        <div> - </div>
+                        <div class='footCont'>
+                            <div class='footDiv'>Made by </div>
+                            <a href="http://taylorjohannsen.com/" class="footText footDiv">Taylor Johannsen</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
@@ -29,3 +71,4 @@
     <script src='/public/client.js'></script>
 </body>
 </html>
+
