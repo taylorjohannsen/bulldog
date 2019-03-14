@@ -21,7 +21,7 @@ const ListSchema = new mongoose.Schema({
         type: String
     },
     price: {
-        type: String
+        type: Number
     },
     date: {
         type: Date,

@@ -3,6 +3,7 @@ const router = express.Router();
 const mongoose = require('mongoose');
 const Listing = require('../models/Listing');
 const { ensureAuthenticated } = require('../config/auth');
+const { isAdmin } = require('../config/isadmin');
 require('../app');
 
 // landing page, shows 4 random documents
@@ -11,9 +12,15 @@ router.get('/', (req, res) => {
         let randomNum = Math.floor(Math.random() * allList);
         randomNum = randomNum - Number(3);
         
-        Listing.findRandom({}, {}, {limit: 4}, function(err, listings) {
+        let curUser = false;
+
+        if (req.user) {
+            curUser = true; 
+        };
+        
+        Listing.findRandom({}, {}, {limit: 6}, function(err, listings) {
             if (err) throw err;
-            res.render('landing', { listings: listings });
+            res.render('landing', { listings: listings, curUser: curUser });
         });
     });
 });

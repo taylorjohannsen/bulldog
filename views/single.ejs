@@ -9,9 +9,9 @@
 <p class="lead mb-3">price, <%= listing.price %></p>
 <p class="lead mb-3">date, <%= listing.date %></p>
 <% listing.photos.forEach(function(photo) { %>
-    <a href='#' class='noDec' onclick="bigDisplay('<%= counter %>')">
+    <button class='butDec' onclick="bigDisplay('<%= counter %>')">
         <img id='<%= counter %>' class='test' src='../<%= photo.path %>'>
-    </a>
+    </button>
     <% counter++; %>
 <% }); %>
 <br>
