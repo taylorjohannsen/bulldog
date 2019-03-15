@@ -337,9 +337,69 @@ iframe {
 .space {
     justify-content: space-between;
 }
+.awayPic {
+    height: 350px;
+    margin-top: 25px;
+    margin-left: 20px;
+    box-shadow: 0px 0px 5px 2.5px rgba(0, 0, 0, 0.315);
+}
+.awayPicRight {
+    height: 350px;
+    margin-top: 25px;
+    float: right;
+    margin-right: 20px;
+    box-shadow: 0px 0px 5px 2.5px rgba(0, 0, 0, 0.315);
+}
+.imgFlex {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    border: 2px solid black;
+}
+.imgFlexBord {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+.imgCont {
+    width: 50%;
+    height: 400px;
+    background-color: rgb(5, 75, 122);
+}
+.imgContWhite {
+    width: 50%;
+    height: 400px;
+}
+.awayDesc {
+    margin-top: 35px;
+    color: white;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    margin-right: 50px;
+}
+.awayDescBlack {
+    margin-top: 35px;
+    color: black;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
 
-
-
+}
+.botTom {
+    margin-bottom: 100px;
+}
+.awayTitle {
+    font-size: 30px;
+    font-weight: 500;
+    margin-bottom: 20px;
+}
+.awayBody {
+    font-size: 20px;
+}
+.lHeight {
+    line-height: 2;
+}
 
 @media only screen and (max-width: 1100px) {
     .container {
