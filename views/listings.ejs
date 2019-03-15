@@ -1,30 +1,43 @@
-<form action='/search' method="POST">
-    <input type='text' id="title" name='title' placeholder="Search..">
-    <button type="submit" class="Submit Top">Search</button>
-</form>
-
-<form action='/low' method="POST">
-    <button type="submit">Price: Low to high</button>
-</form>
-
-<form action='/high' method="POST">
-    <button type="submit">Price: Hight to low</button>
-</form>
-
-
-<form action='/search' method="POST">
-    <button type="submit" class="Submit Top">Newest</button>
-</form>
-
-<% listings.forEach(function(listing) { %>
-    <a href='/listings/<%= listing._id %>'>
-        <p class="lead mb-3">Title, <%= listing.title %></p>
-    </a>
-    <p class="lead mb-3">desc, <%= listing.desc %></p>
-    <p class="lead mb-3">warehouse id, <%= listing.whid %></p>
-    <p class="lead mb-3">price, <%= listing.price %></p>
-    <p class="lead mb-3">date, <%= listing.date.toDateString(); %></p>
-    <% if (listing.photos.length > 0) { %>
-        <img class='test' src='<%= listing.photos[0].path %>'>
-    <% }; %>
-<% }); %>
+<div class="logCont">
+    <div class='headText'>Inventory</div>
+</div>
+<div class='cFlex botMar'>
+    <form action='/search' method="POST">
+        <input type='text' id='title' name='title' class='searchBar' placeholder="Search..">
+        <button class="searchBut quickPad" type="submit"><i class="fas fa-search"></i></button>
+    </form>
+    <div class="logCont">
+        <form action='/search' method="POST">
+            <button class="searchBut" type="submit" class="Submit Top">Newest</button>
+        </form>        
+        <form action='/low' method="POST">
+            <button class="searchBut" type="submit">Price: Low to high</button>
+        </form>
+        <form action='/high' method="POST">
+            <button class="searchBut" type="submit">Price: High to low</button>
+        </form>
+        <form action='/oldest' method="POST">
+            <button class="searchBut" type="submit">Oldest</button>
+        </form>
+    </div>
+</div>
+<div class='listCont'>
+    <% listings.forEach(function(listing) { %>
+        <div class='aListing'>
+            <div class='listImgCont'>
+                <div class='listMar'>
+                    <a href='/listings/<%= listing._id %>' class='noDec'>
+                        <img class='listImg' src='<%= listing.photos[0].path %>'>
+                    </a>
+                </div>
+            </div>
+            <div class='priDate'>
+                <div class='price'>$<%= listing.price %></div>
+                <div class='date'><%= listing.date.toDateString(); %></div>
+            </div>
+            <div class='title'>
+                <a href='/listings/<%= listing._id %>' class='noDec titleText'><%= listing.title %></a>
+            </div>
+        </div>
+    <% }); %>
+</div>

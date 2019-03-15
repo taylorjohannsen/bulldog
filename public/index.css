@@ -254,6 +254,13 @@ iframe {
     margin-top: 50px;
     margin-bottom: 50px;
 }
+.headText {
+    font-size: 30px;
+    font-weight: 500;
+    text-align: center;
+    margin-bottom: 50px;
+
+}
 .userLabel {
     font-size: 20px;
     font-weight: 300;
@@ -283,14 +290,53 @@ iframe {
     float: right;
     padding: 10px;
     border-radius: 5px;
+    width: 100px;
 }
 .message {
     text-align: center;
     margin: 30px;
     font-size: 20px;
 }
-
-
+.botMar {
+    margin-bottom: 50px;
+    justify-content: space-between;
+    margin-left: 5%;
+    margin-right: 5%;
+}
+.searchBar {
+    width: 90%;
+    height: 30px;
+    outline: 0;
+    padding-left: 10px;
+    margin-bottom: 30px;
+    font-size: 18px;
+    border-radius: 5px;
+    border: 1px solid black;
+    transition: 1s ease all;
+}
+.searchBar:focus {
+    transition: 1s ease all;
+    background-color: rgba(128, 128, 128, 0.527);
+}
+.searchBut {
+    height: 35px;
+    background-color: rgb(5, 75, 122);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    margin-right: 10px;
+    font-size: 15px;
+}
+.searchBut:hover {
+    background-color: rgb(19, 100, 155);
+}
+.quickPad {
+    padding-left: 30px;
+    padding-right: 30px;
+}
+.space {
+    justify-content: space-between;
+}
 
 
 

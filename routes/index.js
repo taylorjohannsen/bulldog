@@ -42,7 +42,7 @@ router.get('/listings/:id', (req, res) => {
 // search post
 router.post('/search', (req,  res) => {
     const { title } = req.body; 
-    Listing.find({ $or: [{title: new RegExp(title, 'i')}, {desc: new RegExp(title, 'i')},   {whid: new RegExp(title, 'i')}]}).exec((err, listings) => {
+    Listing.find({ $or: [{title: new RegExp(title, 'i')}, {desc: new RegExp(title, 'i')},   {whid: new RegExp(title, 'i')}]}).sort({'date': -1}).exec((err, listings) => {
         if (err) throw err;
         res.render('listings', { listings: listings });
     });
@@ -60,6 +60,13 @@ router.post('/low', (req,  res) => {
 router.post('/high', (req,  res) => {
     Listing.find({}).sort([['price', -1]]).exec((err, listings) => {
         if (err) throw err;
+        res.render('listings', { listings: listings });
+    });
+});
+
+// search oldest 
+router.post('/oldest', (req, res) => {
+    Listing.find({}).sort({ date: 1 }).exec((err, listings) => {
         res.render('listings', { listings: listings });
     });
 });
