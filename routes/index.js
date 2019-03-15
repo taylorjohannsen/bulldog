@@ -3,7 +3,6 @@ const router = express.Router();
 const mongoose = require('mongoose');
 const Listing = require('../models/Listing');
 const { ensureAuthenticated } = require('../config/auth');
-const { isAdmin } = require('../config/isadmin');
 require('../app');
 
 // landing page, shows 4 random documents
@@ -63,6 +62,16 @@ router.post('/high', (req,  res) => {
         if (err) throw err;
         res.render('listings', { listings: listings });
     });
+});
+
+// contact page
+router.get('/contact', (req, res) => {
+    res.render('contact');
+});
+
+// contact page
+router.get('/about-us', (req, res) => {
+    res.render('about-us');
 });
 
 module.exports = router;
