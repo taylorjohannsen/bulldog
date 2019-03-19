@@ -1,37 +1,58 @@
-<h1 class="mt-4">Dashboard</h1>
-<a href="/admin/logout" class="btn btn-secondary">Logout</a>
-
-<a href="/admin/addlist" class="btn btn-secondary">Add Listing</a>
-
-<form action='/admin/dashsearch' method="POST">
-    <input type='text' id="title" name='title' placeholder="Search...">
-    <input type='text' id='whid' name='whid' placeholder="By warehouse ID..">
-    <button type="submit" class="Submit Top">Post</button>
-</form>
-
-<form action='/admin/low' method="POST">
-    <button type="submit">Price: Low to high</button>
-</form>
-
-<form action='/admin/high' method="POST">
-    <button type="submit">Price: Hight to low</button>
-</form>
-
-<form action='/admin/dashsearch' method="POST">
-    <button type="submit" class="Submit Top">Newest</button>
-</form>
-
-
-
-<% listings.forEach(function(listing) { %>
-    <a href='/admin/inventory/<%= listing._id %>'>
-        <p class="lead mb-3">Title, <%= listing.title %></p>
-    </a>
-    <p class="lead mb-3">desc, <%= listing.desc %></p>
-    <p class="lead mb-3">warehouse id, <%= listing.whid %></p>
-    <p class="lead mb-3">price, <%= listing.price %></p>
-    <p class="lead mb-3">date, <%= listing.date.toDateString(); %></p>
-    <% if (listing.photos.length > 0) { %>
-        <img class='test' src='<%= listing.photos[0].path %>'>
-    <% }; %>
-<% }); %>
+<div class='adminCont'>
+    <a href='/admin/dashboard' class='adText noDec'>Admin Dashboard</a>
+    <div class='adLinkCont'>
+        <a href='/admin/dashboard' class="noDec adLink">Home</a>
+        <a href='/admin/addlist' class="noDec adLink">Add Inventory Post</a>
+        <a href='/admin/logout' class="noDec adLink">Logout</a>
+    </div>
+</div>
+<div class='cFlex botMar'>
+    <form action='/admin/dashsearch' method="POST">
+        <input type='text' id='title' name='title' class='searchBar' placeholder="Search..">
+        <button class="searchBut quickPad" type="submit"><i class="fas fa-search"></i></button>
+        <input type='text' id='whid' name='whid' class='searchBar' placeholder="Warehouse ID...">
+        <button class="searchBut quickPad" type="submit"><i class="fas fa-search"></i></button>
+    </form>
+    <div class="logCont">
+        <form action='/admin/dashsearch' method="POST">
+            <button class="searchBut" type="submit" class="Submit Top">Newest</button>
+        </form>        
+        <form action='/admin/low' method="POST">
+            <button class="searchBut" type="submit">Price: Low to high</button>
+        </form>
+        <form action='/admin/high' method="POST">
+            <button class="searchBut" type="submit">Price: High to low</button>
+        </form>
+        <form action='/admin/oldest' method="POST">
+            <button class="searchBut" type="submit">Oldest</button>
+        </form>
+    </div>
+</div>
+<% include ./partials/messages %>
+<div class='listCont'>
+    <% listings.forEach(function(listing) { %>
+        <div class='aListing'>
+            <div class='listImgCont'>
+                <div class='listMar'>
+                    <a href='/admin/inventory/<%= listing._id %>' class='noDec'>
+                        <img class='listImg' src='<%= listing.photos[0].path %>'>
+                    </a>
+                </div>
+            </div>
+            <div class='priDate'>
+                <div class='price'>$<%= listing.price %></div>
+                <div class='date'><%= listing.date.toDateString(); %></div>
+            </div>
+            <div class='title'>
+                <a href='/admin/inventory/<%= listing._id %>' class='noDec titleText'><%= listing.title %></a>
+            </div>
+            <% if (curUser == true) { %>
+                <div class="botRight">
+                    <form action='/admin/delete/<%= listing._id %>' method="POST">
+                        <button class='deletePost' type="submit">Delete</button>
+                    </form>  
+                </div>
+            <% } %>    
+        </div>
+    <% }); %>
+</div>

@@ -305,6 +305,21 @@ router.post('/high', ensureAuthenticated, (req,  res) => {
     });
 });
 
+// search oldest
+router.post('/oldest', ensureAuthenticated, (req, res) => {
+    Listing.find({}).sort({ date: 1 }).exec((err, listings) => {
+        res.render('dashboard', { listings: listings });
+    });
+});
+
+// delete inventory listing 
+router.post('/delete/:id', ensureAuthenticated, (req, res) => {
+    Listing.deleteOne({ _id: req.params.id }).exec((err) => {
+        req.flash('success_msg', 'Sucessfully deleted!')
+        res.redirect('/admin/dashboard');
+    });
+});
+
 
 
 module.exports = router;
