@@ -2,15 +2,14 @@
     <a href='/admin/dashboard' class='adText noDec'>Admin Dashboard</a>
     <div class='adLinkCont'>
         <a href='/admin/dashboard' class="noDec adLink">Home</a>
-        <a href='/admin/addlist' class="noDec adLink">Add Inventory Post</a>
+        <a href='/admin/addlist' class="noDec adLink">Add Inventory</a>
         <a href='/admin/logout' class="noDec adLink">Logout</a>
     </div>
 </div>
 <div class='cFlex botMar'>
-    <form action='/admin/dashsearch' method="POST">
+    <form class="dFlex" action='/admin/dashsearch' method="POST">
         <input type='text' id='title' name='title' class='searchBar' placeholder="Search..">
-        <button class="searchBut quickPad" type="submit"><i class="fas fa-search"></i></button>
-        <input type='text' id='whid' name='whid' class='searchBar' placeholder="Warehouse ID...">
+        <input type='text' id='whid' name='whid' class='searchBar leftM' placeholder="Warehouse ID...">
         <button class="searchBut quickPad" type="submit"><i class="fas fa-search"></i></button>
     </form>
     <div class="logCont">
@@ -35,7 +34,9 @@
             <div class='listImgCont'>
                 <div class='listMar'>
                     <a href='/admin/inventory/<%= listing._id %>' class='noDec'>
-                        <img class='listImg' src='<%= listing.photos[0].path %>'>
+                        <% if (listing.photos.length > 0) { %>
+                            <img id='big' src='../<%= listing.photos[0].path %>'>
+                        <% }; %>                    
                     </a>
                 </div>
             </div>

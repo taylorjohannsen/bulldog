@@ -2,7 +2,7 @@
     <div class='headText'>Inventory Search</div>
 </div>
 <div class='cFlex botMar'>
-    <form action='/search' method="POST">
+    <form class='dFlex' action='/search' method="POST">
         <input type='text' id='title' name='title' class='searchBar' placeholder="Search..">
         <button class="searchBut quickPad" type="submit"><i class="fas fa-search"></i></button>
     </form>
@@ -27,7 +27,9 @@
             <div class='listImgCont'>
                 <div class='listMar'>
                     <a href='/listings/<%= listing._id %>' class='noDec'>
-                        <img class='listImg' src='<%= listing.photos[0].path %>'>
+                        <% if (listing.photos.length > 0) { %>
+                            <img id='big' src='../<%= listing.photos[0].path %>'>
+                        <% }; %>                    
                     </a>
                 </div>
             </div>

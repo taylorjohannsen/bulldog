@@ -1,16 +1,32 @@
-<a href="/admin/dashboard" class="btn btn-secondary">Dashboard</a>
+<div class='adminCont'>
+  <a href='/admin/dashboard' class='adText noDec'>Admin Dashboard</a>
+  <div class='adLinkCont'>
+      <a href='/admin/dashboard' class="noDec adLink">Home</a>
+      <a href='/admin/addlist' class="noDec adLink">Add Inventory</a>
+      <a href='/admin/logout' class="noDec adLink">Logout</a>
+  </div>
+</div>
 <% include ./partials/messages %>
-
-
-<form class='imageUpload' action="/admin/upload" method="POST">
-    <div>
-      <div class="">
-        <input type='text' id="title" name='title' placeholder="Item Title">
-        <input type='text' id='desc' name='desc' placeholder="Item desc">
-        <input type='text' id='whid' name='whid' placeholder="Item warehouse id">
-        <input type='number' id='price' name='price' placeholder="Item price" step="0.01">
-        <button type="submit" class="Submit Top">Post</button>
-      </div>
+<form action='/admin/upload' method="POST">
+  <div class='dFlex'>
+    <div class='inputCont'>
+      <label for="title">Item Title</label>
+      <input class="addInput" type='text' id="title" name='title' placeholder="Item Title" autocomplete="off">
     </div>
-  </form>
-
+    <div class='inputCont'>
+        <label for="price">Item Price</label>
+        <input class="addInput" type='number' id='price' name='price' placeholder="Item Price" step="0.01" autocomplete="off">
+      </div>
+    <div class='inputCont'>
+      <label for="whid">Warehouse ID</label>
+      <input class="addInput" type='text' id='whid' name='whid' placeholder="Warehouse ID" autocomplete="off">
+    </div>
+  </div>
+  <div class='dFlex'>
+      <div class='inputContDesc'>
+        <label for="desc">Item Description</label>
+        <textarea class="addInputDesc" type='text' id='desc' name='desc' placeholder="Item Description" autocomplete="off"></textarea>
+      </div>
+  </div>
+  <button class="subBut" type="submit" class="Submit Top">Add</button>
+</form>

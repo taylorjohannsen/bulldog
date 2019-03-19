@@ -1,33 +1,63 @@
-<a href="/admin/dashboard" class="btn btn-secondary">Dashboard</a>
+<div class='adminCont'>
+    <a href='/admin/dashboard' class='adText noDec'>Admin Dashboard</a>
+    <div class='adLinkCont'>
+        <a href='/admin/dashboard' class="noDec adLink">Home</a>
+        <a href='/admin/addlist' class="noDec adLink">Add Inventory</a>
+        <a href='/admin/logout' class="noDec adLink">Logout</a>
+    </div>
+</div>
 <% include ./partials/messages %>
 <% let counter = 0; %>
-
-
-<form action='/admin/picupload/<%= listing._id %>' method="POST" enctype="multipart/form-data">
-    <input name="myImage" type="file" multiple>
-    <button type='submit'>Submit</button>
-</form>
-
-<form class='imageUpload' action="/admin/update/<%= listing._id %>" method="POST">
-    <div>
-        <div class="">
-            <input type='text' id="title" name='title' value="<%= listing.title %>">
-            <input type='text' id='desc' name='desc' value="<%= listing.desc %>">
-            <input type='text' id='whid' name='whid' value="<%= listing.whid %>">
-            <input type='number' id='price' name='price' value="<%= listing.price %>">
-            <button type="submit" class="Submit Top">Update Listing</button>
+<div class='quickText'>Update Listing Details</div>
+<div class='quickBor'>
+    <form action='/admin/update/<%= listing._id %>' method="POST">
+        <div class='dFlex'>
+            <div class='inputCont'>
+            <label for="title">Item Title</label>
+            <input class="addInput" type='text' id="title" name='title' autocomplete="off" value="<%= listing.title %>">
+            </div>
+            <div class='inputCont'>
+                <label for="price">Item Price</label>
+                <input class="addInput" type='number' id='price' name='price' value="<%= listing.price %>" step="0.01" autocomplete="off">
+            </div>
+            <div class='inputCont'>
+            <label for="whid">Warehouse ID</label>
+            <input class="addInput" type='text' id='whid' name='whid' value="<%= listing.whid %>" autocomplete="off">
+            </div>
         </div>
-    </div>
-</form>
-
-<% listing.photos.forEach(function(photo) { %>
-    <form action="/admin/deletephoto/<%= listing._id %>/<%= counter %>" method="POST">
-        <% if (photo.path === '../public/logo.png') { %>
-            <img class='test' src='../<%= photo.path %>'>
-        <% } else { %>
-            <img class='test' src='../<%= photo.path %>'>
-            <button type="submit" class="Submit Top">Delete Image</button>    
-        <% } %>
+        <div class='dFlex'>
+            <div class='inputContDesc'>
+                <label for="desc">Item Description</label>
+                <textarea class="addInputDesc" type='text' id='desc' name='desc' value="<%= listing.desc %>" autocomplete="off"></textarea>
+            </div>
+        </div>
+        <button class="subBut" type="submit" class="Submit Top">Update Listing</button>
     </form>
-    <% counter++; %>
-<% }); %>
+</div>
+<div class='quickText'>Add/Delete Photos</div>
+<div class='quickBor'>
+    <form class='fileForm' action='/admin/picupload/<%= listing._id %>' method="POST" enctype="multipart/form-data">
+        <label for='myImage' class='fileUpload'>Upload Photos</label>
+        <input id='myImage' name="myImage" type="file" multiple>
+        <button class='subBut' type='submit'>Submit</button>
+    </form>
+    <div class='formFlex'>
+    <% listing.photos.forEach(function(photo) { %>
+        <form class="formCont" action="/admin/deletephoto/<%= listing._id %>/<%= counter %>" method="POST">
+                <% if (photo.path === '../public/logo.png') { %>
+                    <div class='formImg'>
+                        <img class='test' src='../<%= photo.path %>'>
+                    </div>
+                <% } else { %>
+                    <div class='formImg'>
+                        <img class='test' src='../<%= photo.path %>'>
+                    </div>
+                    <div class='formImg'>
+                        <button class="deletePost butWid" type="submit" class="Submit Top">Delete Image</button>
+                    </div>
+                <% } %>
+        </form>
+        <% counter++; %>
+    <% }); %>  
+    </div>  
+</div>

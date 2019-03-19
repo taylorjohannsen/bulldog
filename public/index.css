@@ -235,11 +235,6 @@ iframe {
 .titleText:hover {
     color: rgb(95, 95, 95);
 }
-.butDec {
-    border: none;
-    padding: none;
-    background-color: white;
-}
 .fRight {
     float: right;
     margin-bottom: 100px;
@@ -295,6 +290,9 @@ iframe {
     border-radius: 5px;
     width: 100px;
 }
+.subBut:hover {
+    background-color: rgb(19, 100, 155);
+}
 .message {
     text-align: center;
     margin: 30px;
@@ -307,7 +305,7 @@ iframe {
     margin-right: 5%;
 }
 .searchBar {
-    width: 90%;
+    width: 85%;
     height: 30px;
     outline: 0;
     padding-left: 10px;
@@ -328,6 +326,7 @@ iframe {
     border: none;
     border-radius: 5px;
     margin-right: 10px;
+    margin-left: 10px;
     font-size: 15px;
 }
 .searchBut:hover {
@@ -444,6 +443,171 @@ iframe {
     text-align: right;
     margin-right: 15px;
 }
+.dFlex {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+.leftM {
+    margin-left: 10px;
+}
+.inputCont {
+    width: 300px;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    font-size: 20px;
+    margin-right: 10px;
+    margin-left: 10px;
+}
+.inputContDesc {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    font-size: 20px;
+    margin-right: 10px;
+    margin-left: 10px;
+    margin-top: 30px;
+}
+.addInput {
+    height: 30px;
+    padding-left: 10px;
+    margin-top: 10px;
+    font-size: 18px;
+    border-radius: 5px;
+    border: 1px solid black;
+    outline: 0;
+    transition: 1s ease all;
+}
+.addInput:focus {
+    transition: 0.5s ease all;
+    background-color: rgba(128, 128, 128, 0.527);
+}
+.addInputDesc {
+    margin-top: 10px;
+    height: 150px;
+    width: 800px;
+    max-width: 800px;
+    padding-left: 10px;    
+    padding-top: 10px;    
+    font-size: 18px;
+    border-radius: 5px;
+    border: 1px solid black;
+    outline: 0;
+    transition: 1s ease all;
+    font-family: inherit;
+    margin-bottom: 30px;
+}
+.addInputDesc:focus {
+    transition: 0.5s ease all;
+    background-color: rgba(128, 128, 128, 0.527);
+}
+.quickBor {
+    border: 5px solid black;
+    overflow: auto;
+    padding: 20px;
+    margin-bottom: 30px;
+}
+.quickText {
+    font-size: 25px;
+    font-weight: 200;
+    padding-left: 10px;
+    padding-bottom: 10px;
+    padding-top: 30px;
+}
+.formFlex {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    padding-top: 30px;
+    border-top: 1px solid black;
+    flex-wrap: wrap;
+}
+.formCont {
+    width: 200px;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    margin-bottom: 20px;
+}
+.formImg {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+.fileForm {
+    margin-bottom: 30px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+.fileUpload {
+    border: 1px solid #ccc;
+    display: inline-block;
+    padding: 12px 15px;
+    cursor: pointer;
+    margin-right: 20px;
+}
+#myImage {
+    display: none;
+}
+.butWid {
+    width: 150px;
+}
+.imgColumn {
+    display: flex;
+    flex-direction: column;
+}
+.newCont {
+    width: 550px;
+    height: 412px;
+    background-color: black;
+    padding: 5px;
+    overflow: hidden;
+}
+.bigPhoto {
+    width: 550px;
+    min-height: 100%;
+}
+.smallPhoto {
+    height: 70px;
+    filter: brightness(70%);
+}
+.smallCont {
+    display: flex;
+    flex-direction: row;
+    width: 550px;
+    flex-wrap: wrap;
+    margin-top: 10px;
+}
+.newDec {
+    width: 80px;
+    overflow: hidden;
+    background-color: black;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    border: none;
+}
+.smallMar {
+    width: 80px;
+    overflow: hidden;
+    border: 5px solid black;
+    margin-right: 10px;
+    margin-bottom: 10px;
+}
+.contentCont {
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 50px;
+}
+.borLeft {
+    margin-right: 50px;
+}
+.borRight {
+    padding-left: 50px;
+    border-left: 1px solid rgba(0, 0, 0, 0.274);
+}
 
 
 @media only screen and (max-width: 1100px) {
@@ -456,3 +620,4 @@ iframe {
         margin-right: 3%;
     }
 }
+

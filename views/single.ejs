@@ -1,21 +1,31 @@
 <% let counter = 0; %>
-<a href="/listings" class="btn btn-secondary btn-block">All Products</a>
-
-<a href='/listings/<%= listing._id %>'>
-    <p class="lead mb-3">Title, <%= listing.title %></p>
-</a>
-<p class="lead mb-3">desc, <%= listing.desc %></p>
-<p class="lead mb-3">warehouse id, <%= listing.whid %></p>
-<p class="lead mb-3">price, <%= listing.price %></p>
-<p class="lead mb-3">date, <%= listing.date %></p>
-<% listing.photos.forEach(function(photo) { %>
-    <button class='butDec' onclick="bigDisplay('<%= counter %>')">
-        <img id='<%= counter %>' class='test' src='../<%= photo.path %>'>
-    </button>
-    <% counter++; %>
-<% }); %>
-<br>
-<% if (listing.photos.length > 0) { %>
-    <img id='big' src='../<%= listing.photos[0].path %>'>
-<% }; %>
-
+<div class='contentCont'>
+    <div class='imgColumn'>
+        <div class='newCont borLeft'>
+            <% if (listing.photos.length > 0) { %>
+                <img id='big' class="bigPhoto" src='../<%= listing.photos[0].path %>'>
+            <% }; %>
+        </div>
+        <div class="smallCont">
+            <% listing.photos.forEach(function(photo) { %>
+                <div class="smallMar">
+                    <button class='newDec' onclick="bigDisplay('<%= counter %>')">
+                        <img id='<%= counter %>' class='smallPhoto' src='../<%= photo.path %>'>
+                    </button>        
+                </div>    
+                <% counter++; %>
+            <% }); %>
+        </div>
+    </div>
+    <div class="imgColumn borRight">
+        <div class='titleDate'>
+            <div class='listTitle'><%= listing.title %></div>
+            <div class='dateWH'>
+                <div class='listTitle'><%= listing.date.toDateString(); %></div>
+                <div class='listTitle'><%= listing.whid %></div>        
+            </div>
+        </div>
+        <div class='listPrice'><%= listing.price %></div>
+        <div class='listDesc'><%= listing.desc %></div>
+    </div>
+</div>
