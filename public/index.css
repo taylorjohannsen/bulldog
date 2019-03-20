@@ -5,7 +5,7 @@ body, html {
     height: 100%;
 }
 #big {
-    height: 200px;
+    width: 100%;
 }
 .mainWrap {
     display: flex;
