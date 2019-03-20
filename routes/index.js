@@ -19,7 +19,7 @@ router.get('/', (req, res) => {
                 res.render('landing', { listings: listings, curUser: curUser });
             });    
         } else {
-            res.render('landing', { curUser: curUser });
+            res.render('no-inventory', { curUser: curUser });
         };
     });
 });
