@@ -7,20 +7,20 @@ require('../app');
 
 // landing page, shows 4 random documents
 router.get('/', (req, res) => {
-    Listing.countDocuments().exec((err, allList) => {
-        let randomNum = Math.floor(Math.random() * allList);
-        randomNum = randomNum - Number(3);
-        
+    Listing.countDocuments().exec((err, allList) => {        
         let curUser = false;
 
         if (req.user) {
             curUser = true; 
         };
-        
-        Listing.findRandom({}, {}, {limit: 6}, function(err, listings) {
-            if (err) throw err;
-            res.render('landing', { listings: listings, curUser: curUser });
-        });
+        if (allList > 0) {
+            Listing.findRandom({}, {}, {limit: 6}, function(err, listings) {
+                if (err) throw err;
+                res.render('landing', { listings: listings, curUser: curUser });
+            });    
+        } else {
+            res.render('landing', { curUser: curUser });
+        };
     });
 });
 
