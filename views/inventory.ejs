@@ -1,27 +1,48 @@
-<a href="/admin/dashboard" class="btn btn-secondary">Dashboard</a>
-<a href="/admin/photos/<%= listing._id %>" class="btn btn-secondary">Edit Listing</a>
 <% let counter = 0; %>
-
-<form action='/admin/deletelisting/<%= listing._id %>' method='POST'>
-    <button type='submit' class="btn btn-secondary">Delete Listing</button>
-</form>
-
-
+<div class='adminCont'>
+    <a href='/admin/dashboard' class='adText noDec'>Admin Dashboard</a>
+    <div class='adLinkCont'>
+        <a href='/admin/dashboard' class="noDec adLink">Home</a>
+        <a href='/admin/addlist' class="noDec adLink">Add Inventory</a>
+        <a href='/admin/logout' class="noDec adLink">Logout</a>
+    </div>
+</div>
+<div class='dFlex topEdit'>
+    <form action='/admin/delete/<%= listing._id %>' method='POST'>
+        <button type='submit' class="subBut">Delete Listing</button>
+    </form>
+    <form action='/admin/edit/<%= listing._id %>' method='GET'>
+        <button type='submit' class="subBut">Edit Listing / Add Photos</button>
+    </form>
+</div>
 <% include ./partials/messages %>
-<a href='/admin/inventory/<%= listing._id %>'>
-    <p class="lead mb-3">Title, <%= listing.title %></p>
-</a>
-<p class="lead mb-3">desc, <%= listing.desc %></p>
-<p class="lead mb-3">warehouse id, <%= listing.whid %></p>
-<p class="lead mb-3">price, <%= listing.price %></p>
-<p class="lead mb-3">date, <%= listing.date.toDateString(); %></p>
-<% listing.photos.forEach(function(photo) { %>
-    <a href='#' class='noDec' onclick="bigDisplay('<%= counter %>')">
-        <img id='<%= counter %>' class='test' src='../<%= photo.path %>'>
-    </a>
-    <% counter++; %>
-<% }); %>
-<br>
-<% if (listing.photos.length > 0) { %>
-    <img id='big' src='../<%= listing.photos[0].path %>'>
-<% }; %>
+<div class='contentCont'>
+    <div class='imgColumn'>
+        <div class='newCont borLeft'>
+            <% if (listing.photos.length > 0) { %>
+                <img id='big' class="bigPhoto" src='../<%= listing.photos[0].path %>'>
+            <% }; %>
+        </div>
+        <div class="smallCont">
+            <% listing.photos.forEach(function(photo) { %>
+                <div class="smallMar">
+                    <button class='newDec' onclick="bigDisplay('<%= counter %>')">
+                        <img id='<%= counter %>' class='smallPhoto' src='../<%= photo.path %>'>
+                    </button>        
+                </div>    
+                <% counter++; %>
+            <% }); %>
+        </div>
+    </div>
+    <div class="imgColumn borRight">
+        <div class='titleDate'>
+            <div class='listTitle'><%= listing.title %></div>
+            <div class='dateWH'>
+                <div class='listDate'><%= listing.date.toDateString(); %></div>
+                <div class='listDate'>Warehouse ID #<%= listing.whid %></div>        
+            </div>
+        </div>
+        <div class='listPrice'>$<%= listing.price %></div>
+        <div class='listDesc'><%= listing.desc %></div>
+    </div>
+</div>

@@ -21,11 +21,34 @@
         <div class='titleDate'>
             <div class='listTitle'><%= listing.title %></div>
             <div class='dateWH'>
-                <div class='listTitle'><%= listing.date.toDateString(); %></div>
-                <div class='listTitle'><%= listing.whid %></div>        
+                <div class='listDate'><%= listing.date.toDateString(); %></div>
+                <div class='listDate'>Warehouse ID #<%= listing.whid %></div>        
             </div>
         </div>
-        <div class='listPrice'><%= listing.price %></div>
+        <div class='listPrice'>$<%= listing.price %></div>
         <div class='listDesc'><%= listing.desc %></div>
     </div>
+</div>
+<div class='recommended'>Recommended</div>
+<div class='listCont offWhite'>
+    <% others.forEach(function(other) { %>
+        <div class='aListing'>
+            <div class='listImgCont'>
+                <div class='listMar'>
+                    <a href='/listings/<%= other._id %>' class='noDec'>
+                        <% if (other.photos.length > 0) { %>
+                            <img id='big' src='../<%= other.photos[0].path %>'>
+                        <% }; %>                    
+                    </a>
+                </div>
+            </div>
+            <div class='priDate'>
+                <div class='price'>$<%= other.price %></div>
+                <div class='date'><%= other.date.toDateString(); %></div>
+            </div>
+            <div class='title'>
+                <a href='/listings/<%= other._id %>' class='noDec titleText'><%= other.title %></a>
+            </div>
+        </div>
+    <% }); %>
 </div>

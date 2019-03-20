@@ -28,7 +28,7 @@
         <div class='dFlex'>
             <div class='inputContDesc'>
                 <label for="desc">Item Description</label>
-                <textarea class="addInputDesc" type='text' id='desc' name='desc' value="<%= listing.desc %>" autocomplete="off"></textarea>
+                <textarea class="addInputDesc" type='text' id='desc' name='desc' autocomplete="off"><%= listing.desc %></textarea>
             </div>
         </div>
         <button class="subBut" type="submit" class="Submit Top">Update Listing</button>
@@ -46,11 +46,11 @@
         <form class="formCont" action="/admin/deletephoto/<%= listing._id %>/<%= counter %>" method="POST">
                 <% if (photo.path === '../public/logo.png') { %>
                     <div class='formImg'>
-                        <img class='test' src='../<%= photo.path %>'>
+                        <img class='editPho' src='../<%= photo.path %>'>
                     </div>
                 <% } else { %>
                     <div class='formImg'>
-                        <img class='test' src='../<%= photo.path %>'>
+                        <img class='editPho' src='../<%= photo.path %>'>
                     </div>
                     <div class='formImg'>
                         <button class="deletePost butWid" type="submit" class="Submit Top">Delete Image</button>

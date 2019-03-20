@@ -1,0 +1,27 @@
+<a href="/admin/dashboard" class="btn btn-secondary">Dashboard</a>
+<a href="/admin/photos/<%= listing._id %>" class="btn btn-secondary">Edit Listing</a>
+<% let counter = 0; %>
+
+<form action='/admin/deletelisting/<%= listing._id %>' method='POST'>
+    <button type='submit' class="btn btn-secondary">Delete Listing</button>
+</form>
+
+
+<% include ./partials/messages %>
+<a href='/admin/inventory/<%= listing._id %>'>
+    <p class="lead mb-3">Title, <%= listing.title %></p>
+</a>
+<p class="lead mb-3">desc, <%= listing.desc %></p>
+<p class="lead mb-3">warehouse id, <%= listing.whid %></p>
+<p class="lead mb-3">price, <%= listing.price %></p>
+<p class="lead mb-3">date, <%= listing.date.toDateString(); %></p>
+<% listing.photos.forEach(function(photo) { %>
+    <a href='#' class='noDec' onclick="bigDisplay('<%= counter %>')">
+        <img id='<%= counter %>' class='test' src='../<%= photo.path %>'>
+    </a>
+    <% counter++; %>
+<% }); %>
+<br>
+<% if (listing.photos.length > 0) { %>
+    <img id='big' src='../<%= listing.photos[0].path %>'>
+<% }; %>

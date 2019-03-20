@@ -180,7 +180,7 @@ router.get('/inventory/:id', ensureAuthenticated, (req, res, next) => {
 });
 
 // add photos page
-router.get('/photos/:id', ensureAuthenticated, (req, res, next) => {
+router.get('/edit/:id', ensureAuthenticated, (req, res, next) => {
     Listing.findOne({ _id: req.params.id }).exec((err, listing) => {
         if (err) throw err;
         res.render('edit', { listing: listing });
@@ -238,7 +238,7 @@ router.post('/update/:id', ensureAuthenticated, (req, res, next) => {
 });
 
 // delete listing
-router.post('/deletelisting/:id', ensureAuthenticated, (req, res, next) => {
+router.post('/delete/:id', ensureAuthenticated, (req, res, next) => {
     Listing.findOne({ _id: req.params.id }).exec((err, listing) => {
         listing.photos.forEach((photo) => {
             let photoPath = photo.path.toString();
@@ -253,6 +253,7 @@ router.post('/deletelisting/:id', ensureAuthenticated, (req, res, next) => {
        
         Listing.deleteOne({ _id: req.params.id }, function(err) {
             if (err) throw err;
+            req.flash('success_msg', 'Item successfully deleted!');
             res.redirect('/admin/dashboard');
         });
     });
@@ -271,6 +272,15 @@ router.post('/deletephoto/:id/:index', ensureAuthenticated, (req, res, next) => 
 
         listing.photos.splice(req.params.index, 1);
         listing.markModified('photos');
+
+        if (listing.photos.length === 0) {
+            let defPhoto = ({
+                path: '../public/logo.png',
+            });
+
+            listing.photos.push(defPhoto);
+            listing.markModified('photos');
+        }
 
         listing.save(function(err) {
             if (err) throw err;
@@ -311,15 +321,6 @@ router.post('/oldest', ensureAuthenticated, (req, res) => {
         res.render('dashboard', { listings: listings });
     });
 });
-
-// delete inventory listing 
-router.post('/delete/:id', ensureAuthenticated, (req, res) => {
-    Listing.deleteOne({ _id: req.params.id }).exec((err) => {
-        req.flash('success_msg', 'Sucessfully deleted!')
-        res.redirect('/admin/dashboard');
-    });
-});
-
 
 
 module.exports = router;

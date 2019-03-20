@@ -4,17 +4,9 @@ body, html {
     padding: 0;
     height: 100%;
 }
-.test {
-    height: 100px;
-    padding: 10px;
-}
-.cats {
-    margin-left: 100px;
-}
 #big {
     height: 200px;
 }
-
 .mainWrap {
     display: flex;
     flex-direction: column;
@@ -103,7 +95,7 @@ iframe {
 .madeBy {
     height: 100px;
     width: 100%;
-    background-color: rgb(0, 61, 102);
+    background-color: #444c5e;
     color: white;
     display: flex;
     flex-direction: row;
@@ -141,6 +133,7 @@ iframe {
 .imgDiv {
     height: 600px;
     overflow: hidden;
+    box-shadow: 0px 0px 5px 1.5px rgba(0, 0, 0, 0.685);
 }
 .frontImg {
     height: 700px;
@@ -191,7 +184,7 @@ iframe {
 .listImgCont {
     height: 210px;
     width: 340px;
-    background-color: rgb(5, 75, 122);
+    background-color: #444c5e;
     padding-bottom: 10px;
 }
 .listImg {
@@ -284,11 +277,10 @@ iframe {
     font-size: 20px;
     color: white;
     border: none;
-    background-color: rgb(5, 75, 122);
+    background-color: #444c5e;
     float: right;
     padding: 10px;
     border-radius: 5px;
-    width: 100px;
 }
 .subBut:hover {
     background-color: rgb(19, 100, 155);
@@ -321,7 +313,7 @@ iframe {
 }
 .searchBut {
     height: 35px;
-    background-color: rgb(5, 75, 122);
+    background-color: #444c5e;
     color: white;
     border: none;
     border-radius: 5px;
@@ -366,7 +358,7 @@ iframe {
 .imgCont {
     width: 50%;
     height: 400px;
-    background-color: rgb(5, 75, 122);
+    background-color: #444c5e;
 }
 .imgContWhite {
     width: 50%;
@@ -562,7 +554,7 @@ iframe {
     width: 550px;
     height: 412px;
     background-color: black;
-    padding: 5px;
+    padding: 2px;
     overflow: hidden;
 }
 .bigPhoto {
@@ -602,13 +594,52 @@ iframe {
     margin-bottom: 50px;
 }
 .borLeft {
-    margin-right: 50px;
+    margin-right: 30px;
 }
 .borRight {
-    padding-left: 50px;
-    border-left: 1px solid rgba(0, 0, 0, 0.274);
+    padding-left: 30px;
 }
-
+.listTitle {
+    font-size: 25px;
+    font-weight: 400;
+    margin-bottom: 10px;
+}
+.titleDate {
+    display: flex;
+    flex-direction: column;
+    min-width: 300px;
+}
+.listDate {
+    font-size: 14px;
+    color: rgba(128, 128, 128, 0.692);
+}
+.dateWH {
+    margin-bottom: 15px;
+}
+.listPrice {
+    font-size: 22px;
+    font-weight: 500;
+    margin-bottom: 20px;
+}
+.offWhite {
+    background-color: rgba(204, 204, 204, 0.199);
+    padding-top: 30px;
+    margin-bottom: 30px;
+}
+.recommended {
+    margin-bottom: 10px;
+    font-size: 18px;
+    font-weight: 200;
+    margin-left: 10px;
+    margin-top: 120px;
+}
+.editPho {
+    height: 100px;
+    padding-bottom: 10px;
+}
+.topEdit {
+    margin-bottom: 50px;
+}
 
 @media only screen and (max-width: 1100px) {
     .container {

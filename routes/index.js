@@ -33,9 +33,12 @@ router.get('/listings', (req, res) => {
 
 // single listing page
 router.get('/listings/:id', (req, res) => {
-    Listing.findOne({ _id: req.params.id }).exec((err, listing) => {
+    Listing.findRandom({}, {}, {limit: 3}, function(err, others) {
         if (err) throw err;
-        res.render('single', { listing: listing });
+        Listing.findOne({ _id: req.params.id }).exec((err, listing) => {
+            if (err) throw err;
+            res.render('single', { listing: listing, others: others });
+        });
     });
 });
 
