@@ -551,14 +551,16 @@ iframe {
     flex-direction: column;
 }
 .newCont {
-    width: 550px;
-    height: 412px;
+    max-width: 600px;
+    height: 400px;
     background-color: black;
-    padding: 2px;
+    border: 2px solid black;
     overflow: hidden;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
 }
 .bigPhoto {
-    width: 550px;
     min-height: 100%;
 }
 .smallPhoto {
