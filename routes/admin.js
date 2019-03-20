@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const User = require('../models/User');
 const Listing = require('../models/Listing');
+const bodyParser = require('body-parser');
 const bcrypt = require('bcryptjs');
 const flash = require('connect-flash');
 const passport = require('passport');
