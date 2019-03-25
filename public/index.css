@@ -654,9 +654,18 @@ iframe {
     padding-right: 10px;
 }
 .space {
+    display: flex;
+    flex-direction: row;
     justify-content: center;
 }
-@media only screen and (max-width: 1100px) {
+.footerFlex {
+    padding-top: 10px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+@media only screen and (max-width: 1200px) {
     .container {
         margin-left: 1%;
         margin-right: 1%;
@@ -667,3 +676,193 @@ iframe {
     }
 }
 
+@media only screen and (max-width: 1050px) {
+    .container {
+        margin-left: 1%;
+        margin-right: 1%;
+    }
+    .navBar {
+        margin-left: 3%;
+        margin-right: 3%;
+    }
+    .mainLogo {
+        height: 100px;
+    }
+    .imgDiv {
+        height: 100%;
+    }
+    .frontImg {
+        width: 100%;
+        height: 100%;
+    }
+    .welCont {
+        margin-top: 50px;
+    }
+    .welBody {
+        margin-left: 5%;
+        margin-right: 5%;
+        margin-bottom: 50px;
+    }
+    .navBar {
+        margin-top: 50px;
+    }
+    .imgFlex {
+        flex-direction: column;
+    }
+}
+
+@media only screen and (max-width: 1024px) {
+    .footCont {
+        text-align: center;
+        justify-content: center;
+    }
+    .footCont:first-child {
+        margin-bottom: 0 !important;
+    }
+    .footerFlex {
+        padding-top: 10px;
+        flex-direction: column;
+    }
+    .locMap {
+        width: 100%;
+        padding: 0;
+    }
+    .locInfo {
+        width: 100%;
+        padding: 0;
+        border: 0;
+    }
+    .flexWrap {
+        flex-direction: column !important;
+        text-align: center;
+    }
+    .richEmail {
+        text-align: center;
+    }
+    .logCont {
+        flex-wrap: wrap;
+    }
+    .searchBut {
+        margin-bottom: 5px;
+    }
+    .imgCont {
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+    }
+    .awayDesc {
+        margin-right: 0;
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+    .awayPic {
+        width: 100%;
+        height: 100%;
+        margin: 0;
+    }
+    .awayBody {
+        height: 100%;
+        width: 100%;
+        padding-bottom: 10px;
+    }
+    .imgFlexBord {
+        flex-direction: column;
+    }
+    .imgContWhite {
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+    }
+    .awayPicRight {
+        width: 100%;
+        margin: 0;
+        height: 100%;
+        padding-bottom: 30px;
+    }
+    .contentCont {
+        flex-direction: column;
+        margin-left: 1%;
+        margin-right: 1%;
+    }
+    .newCont {
+        width: 100%;
+        height: 100%;
+    }
+    .smallCont {
+        width: 100%;
+    }
+    .bigPhoto {
+        height: 100%;
+    }
+    .borRight {
+        padding-left: 0;
+        margin-left: 3%;
+        margin-right: 3%;
+    }
+    .offWhite {
+        background-color: white;
+    }
+    .imgColumn {
+        height: 100%;
+    }
+    .addInputDesc {
+        width: 500px;
+    }
+}
+
+@media only screen and (max-width: 750px) {
+    .aListing {
+        width: 100%;
+    }
+    .listCont {
+        width: 90%;
+        margin-left: 5%;
+        margin-right: 5%;
+    }
+    .listImgCont {
+        width: 100%;
+    } 
+    .userInput {
+        width: 230px;
+    }
+    .adminCont {
+        flex-direction: column;
+    }
+    .adText {
+        margin-bottom: 20px;
+    }
+    .space {
+        flex-direction: column;
+    }
+    .leftM {
+        margin-left: 0;
+    }
+    .quickPad {
+        margin-bottom: 20px;
+    }
+    .searchBar {
+        width: 95%;
+    }
+    .quickBor {
+        padding: 0;
+        padding-bottom: 10px;
+    }
+    .inputCont {
+        width: 250px;
+    }
+    .addInput {
+        margin-bottom: 5px;
+    }
+    .addInputDesc {
+        width: 250px;
+    }
+    .fileForm {
+        margin-top: 20px;
+    }
+    .subBut {
+        margin-bottom: 10px;
+    }
+}
