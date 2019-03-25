@@ -67,4 +67,4 @@ app.use(function(req, res, next) {
 app.use('/', require('./routes/index'));
 app.use('/admin', require('./routes/admin'));
 
-app.listen(7002, console.log('Server started on port 3000!'));
+app.listen(process.env.PORT, console.log('Server started on port 3000!'));
