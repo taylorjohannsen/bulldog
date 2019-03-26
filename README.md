@@ -12,6 +12,6 @@ This website was made with the following technology:
 - EJS 
 - MongoDB
 
-Hosted on NodeChef
+Hosted on Heroku
 
-Live website - 
+Live website - https://www.bulldogliquidatorsofcamarillo.com/
